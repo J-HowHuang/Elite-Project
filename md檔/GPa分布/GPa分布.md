@@ -55,8 +55,8 @@ sample %>% ggplot(aes(x=GPA)) + geom_histogram(bins = 6)
 ![png](output_4_0.png)
 
 
-#### 檢驗管院學生GPa是否低於3.73
-$H_0 : p \geqslant 3.73\\H_1 : p < 3.73$
+#### 檢驗管院學生GPa是否高於3.73
+$H_0 : p \leqslant 3.73\\H_1 : p > 3.73$
 <br/><br/>
 註:在假設資料接近t分配之下進行檢定
 #### p-value
@@ -66,15 +66,15 @@ $H_0 : p \geqslant 3.73\\H_1 : p < 3.73$
 phat <- mean(sample[,"GPA"])
 phat
 df <- 34
-pt((phat-3.73)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = T)
+pt((phat-3.73)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = F)
 ```
 
 
-3.63171052631579
+3.61685714285714
 
 
 
-0.0932815897195471
+0.951830747489718
 
 
 ### 小結
