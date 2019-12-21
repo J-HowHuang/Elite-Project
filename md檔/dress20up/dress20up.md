@@ -87,6 +87,13 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ![png](output_7_0.png)
 
 
+### 小結
+我們發現在樣本中，<br/>
+管院學生和非管院學生在打扮20分鐘以上的比例沒有太明顯的差異<br/>
+在此推測這個比例受到各學院性別比例的影響較為大<br/>
+女性比例較多的學院也許會傾向較大的比例<br/>
+我們會在後面觀察我們的猜測<br/>
+
 ## 男性
 
 
@@ -101,7 +108,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_9_0.png)
+![png](output_10_0.png)
 
 
 ## 女性
@@ -118,8 +125,13 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_11_0.png)
+![png](output_12_0.png)
 
+
+### 小結
+由此性別分布的狀況來看，<br/>
+樣本之中確實女性在該比例較男性大的多<br/>
+此結果也符合現實的直覺。
 
 ## 大二學生
 
@@ -135,7 +147,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_13_0.png)
+![png](output_15_0.png)
 
 
 ## 大三學生
@@ -152,7 +164,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_15_0.png)
+![png](output_17_0.png)
 
 
 ## 大四學生
@@ -169,7 +181,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_17_0.png)
+![png](output_19_0.png)
 
 
 ## 按年級比較
@@ -187,8 +199,17 @@ observing %>% group_by(grade) %>% summarise(dress20up = sum(dress20up) ,total = 
 ```
 
 
-![png](output_19_0.png)
+![png](output_21_0.png)
 
+
+### 小結
+有趣的是，<br/>
+這個比例似乎隨著年級升高而下降，<br/>
+猜想生活環境會影響學生打扮的時間，<br/>
+一般大二生較常在學校中上課，<br/>
+而隨年級增長生活重心逐漸趨於研究，<br/>
+或在外的就職活動，<br/>
+人際、交際活動的減少也減少了打扮的需求<br/>
 
 ## 按學院比較
 
@@ -205,8 +226,17 @@ observing %>% group_by(school) %>% summarise(dress20up = sum(dress20up) ,total =
 ```
 
 
-![png](output_21_0.png)
+![png](output_24_0.png)
 
+
+### 小結
+在校方統計中，<br/>
+文學院、法學院、管理學院、社科院在女性的比例較高(高於男性)<br/>
+在此樣本中，<br/>
+可以看見打扮時間大於二十分鐘比例較高的文學院、法學院<br/>
+確實有較高的女性比例，<br/>
+而男性比例較高的理學院、工學院、電資學院在樣本中打扮大於二十分鐘的比例也極端低<br/>
+可佐證女性的比例會影響打扮大於二十分鐘的比例
 
 # 非管院學生花費超過20分/日在著裝 之信賴區間
 

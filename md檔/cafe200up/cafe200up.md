@@ -1,5 +1,7 @@
 
 # 每周咖啡廳消費比例
+<br/>
+管院的既定印象就是一手拿MacBook一手拿Starbucks，似乎一杯咖啡是再標準不過的裝飾配件，顯現自己時尚的生活品味。<br/>因此我們想要觀察台大管院的學生，是否真的在咖啡廳消費較其他學院的人多。
 
 
 ```R
@@ -87,6 +89,10 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ![png](output_7_0.png)
 
 
+### 小結
+單從樣本來看，管院學生單週在咖啡廳消費超過200塊新台幣的比例高於非管院學生。<br/>
+我們會在後面對管院與非管院的母體平均做假設並檢驗。
+
 ## 男性
 
 
@@ -101,7 +107,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_9_0.png)
+![png](output_10_0.png)
 
 
 ## 女性
@@ -118,8 +124,11 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_11_0.png)
+![png](output_12_0.png)
 
+
+### 小結
+就樣本看來，男性在咖啡廳的消費普遍是比女性還高
 
 ## 大二學生
 
@@ -135,7 +144,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_13_0.png)
+![png](output_15_0.png)
 
 
 ## 大三學生
@@ -152,7 +161,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_15_0.png)
+![png](output_17_0.png)
 
 
 ## 大四學生
@@ -169,7 +178,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_17_0.png)
+![png](output_19_0.png)
 
 
 ## 按年級比較
@@ -187,7 +196,7 @@ observing %>% group_by(grade) %>% summarise(cafe200up = sum(cafe200up) ,total = 
 ```
 
 
-![png](output_19_0.png)
+![png](output_21_0.png)
 
 
 ## 按學院比較
@@ -205,7 +214,7 @@ observing %>% group_by(school) %>% summarise(cafe200up = sum(cafe200up) ,total =
 ```
 
 
-![png](output_21_0.png)
+![png](output_23_0.png)
 
 
 # 非管院學生花費超過200元/週在咖啡廳 之信賴區間

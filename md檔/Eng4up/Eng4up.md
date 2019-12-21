@@ -1,5 +1,9 @@
 
 # 英文能力比例
+註:英語能力的判定是藉由問卷調查曾通過的任意英檢項目的分數，並依以下方式做換算<br/>
+http://www.ciall.nkfust.edu.tw/ezfiles/44/1044/img/800/206918726.pdf<br/>
+若不曾參與過英語檢定，則忽略此筆觀測<br/>
+共有15%的受試者不曾參與過英語檢定
 
 
 ```R
@@ -45,7 +49,7 @@ sample <- observing
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "Spend more than 20min/day at dressing up",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
@@ -62,7 +66,7 @@ sample <- observing %>% filter(school == 7)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
@@ -79,7 +83,7 @@ sample <- observing %>% filter(school != 7)
 sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
@@ -96,7 +100,7 @@ sample <- observing %>% filter(gender == 1)
 sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
@@ -113,7 +117,7 @@ sample <- observing %>% filter(gender == 2)
 sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
@@ -121,6 +125,11 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 
 ![png](output_11_0.png)
 
+
+### 小結
+由樣本可以初步觀察到，<br/>
+女性英文能力在4(C1)以上的比率較男性來的高<br/>
+得到初步結論女性在英語能力上表現優異者可能較男性高<br/>
 
 ## 大二學生
 
@@ -130,13 +139,13 @@ sample <- observing %>% filter(grade == 2)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
 
 
-![png](output_13_0.png)
+![png](output_14_0.png)
 
 
 ## 大三學生
@@ -147,13 +156,13 @@ sample <- observing %>% filter(grade == 3)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
 
 
-![png](output_15_0.png)
+![png](output_16_0.png)
 
 
 ## 大四學生
@@ -164,13 +173,13 @@ sample <- observing %>% filter(grade == 4)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(Eng4up, levels = c(T, F)))) +
     geom_bar(width = 1, stat = "identity") + coord_polar("y", start=0) +
-     scale_fill_manual(name = "English proficiency equal or better than 4",
+     scale_fill_manual(name = "English proficiency equal or better than C1",
                          values = c("#FF8040", "grey")) +
       geom_text(aes(x= 1.2, y=pos, label = paste(round(p, 4)*100, "%")), size=7)
 ```
 
 
-![png](output_17_0.png)
+![png](output_18_0.png)
 
 
 ## 按年級比較
@@ -182,14 +191,22 @@ observing %>% group_by(grade) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) %
     ggplot(aes(x = grade, y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
                    y= p ), stat= "identity", position = position_dodge(1), size = 6) +
-    labs(x = "Grade", y = "Rate of English proficiency equal or better than 4", title = "English proficiency") +
+    labs(x = "Grade", y = "Rate of English proficiency equal or better than C1", title = "English proficiency") +
     theme(plot.title = element_text(size = 24),
           axis.title = element_text(size = 18))
 ```
 
 
-![png](output_19_0.png)
+![png](output_20_0.png)
 
+
+### 小結
+相比之下在樣本之中<br/>
+大二的外語優越比例較大三與大四兩個年級高了不少<br/>
+照常理判斷，英語測驗的結果反映的是考試當下的英語能力<br/>
+而非當下即時或該年的英語能力。<br/>
+因此能力分布不該是這樣遞減的關係。<br/>
+原因仍有待商榷<br/>
 
 ## 按學院比較
 
@@ -200,13 +217,13 @@ observing %>% group_by(school) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) 
     ggplot(aes(x = factor(school), y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
                    y= p ), stat= "identity", position = position_dodge(1), size = 6) +
-    labs(x = "school", y = "Rate of English proficiency equal or better than 4", title = "English proficiency") +
+    labs(x = "school", y = "Rate of English proficiency equal or better than C1", title = "English proficiency") +
     theme(plot.title = element_text(size = 24),
           axis.title = element_text(size = 18))
 ```
 
 
-![png](output_21_0.png)
+![png](output_23_0.png)
 
 
 # 非管院學生英文程度大於或等於4 之信賴區間
@@ -246,7 +263,7 @@ paste0("[ ", round(LCL,4) * 100, "%, ", round(UCL,4) * 100, "% ]")
 '[ 16.66%, 31.4% ]'
 
 
-#### 檢驗非管院學生英文程度大於或等於4比例是否低於0.25
+#### 檢驗非管院學生英文程度大於或等於C1比例是否低於0.25
 $H_0 : p \geqslant 0.25\\H_1 : p < 0.25$
 
 
@@ -302,7 +319,7 @@ paste0("[ ", round(LCL,4) * 100, "%, ", round(UCL,4) * 100, "% ]")
 '[ 13.6%, 46.4% ]'
 
 
-#### 檢驗管院學生英文程度大於或等於4比例是否高於0.25
+#### 檢驗管院學生英文程度大於或等於C1比例是否高於0.25
 $H_0 : p \leqslant 0.25\\H_1 : p > 0.25$
 
 
@@ -318,3 +335,6 @@ pnorm(z, lower.tail = F)
 
 0.263544628432769
 
+
+### 小結
+我們無法從樣本看出明顯的管院與非管院差異，<br/>

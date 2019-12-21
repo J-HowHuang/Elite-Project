@@ -18,7 +18,7 @@ str(data)
      $ hasSuit                       : int  0 1 0 1 0 1 1 0 1 0 ...
      $ timeToDressUp                 : int  45 35 15 5 5 5 25 15 25 15 ...
      $ cafePricePerWeek              : int  150 250 250 50 0 0 150 0 50 150 ...
-     $ mealPricePerDay               : Factor w/ 6 levels "150","250","350",..: 1 3 3 1 1 1 1 2 2 2 ...
+     $ mealPricePerDay               : int  150 350 350 150 150 150 150 250 250 250 ...
      $ hasCreditCard                 : int  1 1 1 0 0 1 0 0 1 0 ...
      $ hasAttendedBusinessCompetition: int  0 0 0 0 0 0 1 0 1 0 ...
      $ EnglishProficiency            : int  4 4 3 NA 3 5 2 3 2 5 ...
@@ -55,8 +55,8 @@ sample %>% ggplot(aes(x=GPA)) + geom_histogram(bins = 6)
 ![png](output_4_0.png)
 
 
-#### 檢驗管院學生GPa是否高於3.5
-$H_0 : p \leqslant 3.5\\H_1 : p > 3.5$
+#### 檢驗管院學生GPa是否低於3.73
+$H_0 : p \geqslant 3.73\\H_1 : p < 3.73$
 <br/><br/>
 註:在假設資料接近t分配之下進行檢定
 #### p-value
@@ -66,16 +66,24 @@ $H_0 : p \leqslant 3.5\\H_1 : p > 3.5$
 phat <- mean(sample[,"GPA"])
 phat
 df <- 34
-pt((phat-3.5)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = F)
+pt((phat-3.73)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = T)
 ```
 
 
-3.61685714285714
+3.63171052631579
 
 
 
-0.0431570042402398
+0.0932815897195471
 
+
+### 小結
+在此，我們將台灣大學的管院平均GPA<br/>
+與GPA計算方式與台大相似的史丹佛大學商學院的平均GPA 3.73做比較，<br/>
+來檢驗是否台灣大學非管院學生的平均GPA較史丹大學全體來得低。<br/>
+而事實上這次的檢驗我們並有極為充足的證據說明台大管院學生的平均GPA低於3.73，<br/>
+然而，史丹佛商學院僅提供碩士學位，<br/>因此GPA標準的不同是否能準確比較兩校GPA表現仍需存疑<br/><br/>
+資料來源<br/>https://poetsandquants.com/2014/03/27/average-gpas-at-top-50-u-s-business-schools/
 
 ## 非管院學生GPa分布
 
@@ -86,11 +94,11 @@ sample %>% ggplot(aes(x=GPA)) + geom_histogram(bins = 8)
 ```
 
 
-![png](output_8_0.png)
+![png](output_9_0.png)
 
 
-#### 檢驗管院學生GPa是否高於3.5
-$H_0 : p \leqslant 3.5\\H_1 : p > 3.5$
+#### 檢驗非管院學生GPa是否低於3.94
+$H_0 : p \geqslant 3.94\\H_1 : p < 3.94$
 <br/><br/>
 註:在假設資料接近t分配之下進行檢定
 #### p-value
@@ -100,7 +108,7 @@ $H_0 : p \leqslant 3.5\\H_1 : p > 3.5$
 phat <- mean(sample[,"GPA"])
 phat
 df <- 34
-pt((phat-3.5)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = F)
+pt((phat-3.94)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = T)
 ```
 
 
@@ -108,5 +116,19 @@ pt((phat-3.5)/sd(sample[,"GPA"])*sqrt(35), df, lower.tail = F)
 
 
 
-0.0398578776653965
+8.37999688360886e-05
 
+
+### 小結
+在此，我們將台灣大學的非管院平均GPA<br/>
+與學生人數規模、科系分布且GPA計算方式與台大相似的史丹佛大學的平均GPA 3.94做比較，<br/>
+來檢驗是否台灣大學非管院學生的平均GPA較史丹大學全體來得低。<br/>
+而事實上這次的檢驗我們並有極為充足的證據說明台大非管院學生的平均GPA低於3.94，
+<br/><br/>
+資料來源<br/>
+https://www.prepscholar.com/sat/s/colleges/Stanford-admission-requirements<br/><br/>
+由histogram可見回收的樣本中，<br/>
+管院學生成績從B-起跳，非管院則有B-以下的；<br/>
+但仔細觀察高分群，A以上的比例其實兩種sample相差不大，都將近七成。<br/>
+(所以其他學院的孩子不要在嘴我們GPA高了好嗎 你們也不差呢)<br/>
+<br/>
