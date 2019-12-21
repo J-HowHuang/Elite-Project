@@ -199,6 +199,10 @@ observing %>% group_by(grade) %>% summarise(cafe200up = sum(cafe200up) ,total = 
 ![png](output_21_0.png)
 
 
+### 小結
+單從樣本來看，我們無法大致看出年級與咖啡廳消費金額的關係。<br/>
+只能說大四的在咖啡廳每週消費大於兩百元的比例略低
+
 ## 按學院比較
 
 
@@ -214,7 +218,7 @@ observing %>% group_by(school) %>% summarise(cafe200up = sum(cafe200up) ,total =
 ```
 
 
-![png](output_23_0.png)
+![png](output_24_0.png)
 
 
 # 非管院學生花費超過200元/週在咖啡廳 之信賴區間

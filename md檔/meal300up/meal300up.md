@@ -53,6 +53,11 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ![png](output_3_0.png)
 
 
+### 小結
+整體台大學生中，每日花費超過300元在飲食方面的學生比例約佔兩成，<br/>
+而在管院中則約佔三分之一，在非管院學生中約佔18%，<br/>
+猜測造成的可能原因是：管院鄰近公館，物價較學生餐廳高。
+
 ## 管院學生
 
 
@@ -67,7 +72,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_5_0.png)
+![png](output_6_0.png)
 
 
 ## 非管院學生
@@ -84,7 +89,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_7_0.png)
+![png](output_8_0.png)
 
 
 ## 男性
@@ -101,7 +106,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_9_0.png)
+![png](output_10_0.png)
 
 
 ## 女性
@@ -118,8 +123,13 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ```
 
 
-![png](output_11_0.png)
+![png](output_12_0.png)
 
+
+### 小結
+以台大整體來說，<br/>
+男生中每日花費超過300元在飲食方面的比例為28.42%遠大於女生的13.04%，<br/>
+男生的食量理應較大，結果滿符合大眾的認知。
 
 ## 大二學生
 
@@ -135,7 +145,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_13_0.png)
+![png](output_15_0.png)
 
 
 ## 大三學生
@@ -152,7 +162,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_15_0.png)
+![png](output_17_0.png)
 
 
 ## 大四學生
@@ -169,14 +179,14 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ```
 
 
-![png](output_17_0.png)
+![png](output_19_0.png)
 
 
 ## 按年級比較
 
 
 ```R
-options(repr.plot.width=8, repr.plot.height=8)
+options(repr.plot.width=16, repr.plot.height=8)
 observing %>% group_by(grade) %>% summarise(meal300up = sum(meal300up) ,total = n()) %>% mutate(p = meal300up / total) %>%
     ggplot(aes(x = grade, y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
@@ -187,15 +197,32 @@ observing %>% group_by(grade) %>% summarise(meal300up = sum(meal300up) ,total = 
 ```
 
 
-![png](output_19_0.png)
+![png](output_21_0.png)
+
+
+### 小結
+每日花費超過300元在飲食方面的學生比例有隨年齡增加而增加的趨勢。
 
 
 ## 按學院比較
 
 
 ```R
-options(repr.plot.width=8, repr.plot.height=8)
-observing %>% group_by(school) %>% summarise(meal300up = sum(meal300up) ,total = n()) %>% mutate(p = meal300up / total) %>%
+options(repr.plot.width=16, repr.plot.height=8)
+
+ob2 <- observing
+ob2$school[ob2$school == 1] = "文學院"
+ob2$school[ob2$school == 2] = "理學院"
+ob2$school[ob2$school == 3] = "社科院"
+ob2$school[ob2$school == 4] = "醫學院"
+ob2$school[ob2$school == 5] = "工學院"
+ob2$school[ob2$school == 6] = "生農學院"
+ob2$school[ob2$school == 7] = "管理學院"
+ob2$school[ob2$school == 8] = "公衛學院"
+ob2$school[ob2$school == 9] = "電資學院"
+ob2$school[ob2$school == 10] = "法律學院"
+ob2$school[ob2$school == 11] = "生科院"
+ob2  %>% group_by(school) %>% summarise(meal300up = sum(meal300up) ,total = n()) %>% mutate(p = meal300up / total) %>%
     ggplot(aes(x = factor(school), y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
                    y= p ), stat= "identity", position = position_dodge(1), size = 6) +
@@ -205,7 +232,7 @@ observing %>% group_by(school) %>% summarise(meal300up = sum(meal300up) ,total =
 ```
 
 
-![png](output_21_0.png)
+![png](output_24_0.png)
 
 
 # 非管院學生花費超過300元/日在飲食 之信賴區間
@@ -317,3 +344,9 @@ pnorm(z, lower.tail = F)
 
 0.102279376360276
 
+
+### 小結
+我們有90%的信心水準，<br/>
+說明管院學生有兩成五以上的學生每日在飲食花費超過300元<br/>
+同樣，我們也有90%的信心水準，<br/>
+說明非管院學生有兩成五以下的學生每日在飲食上的花費超過300元<br/>
