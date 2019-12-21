@@ -2,7 +2,7 @@
 # 每日打扮時間比例
 
 
-```R
+```
 data <- read.csv("D:/JHow/Program/Statistic/elite.csv")
 library(ggplot2)
 library(dplyr)
@@ -38,7 +38,7 @@ observing <- data %>% mutate(dress20up = timeToDressUp > 20) %>% group_by(dress2
 ## 整體樣本
 
 
-```R
+```
 sample <- observing
 options(repr.plot.width=16, repr.plot.height=8)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
@@ -56,7 +56,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ## 管院學生
 
 
-```R
+```
 sample <- observing %>% filter(school == 7)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -73,7 +73,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ## 非管院學生
 
 
-```R
+```
 sample <- observing %>% filter(school != 7)
 sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -97,7 +97,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ## 男性
 
 
-```R
+```
 sample <- observing %>% filter(gender == 1)
 sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -114,7 +114,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ## 女性
 
 
-```R
+```
 sample <- observing %>% filter(gender == 2)
 sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -136,7 +136,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample))  %>% mutate(pos = cumsum(p)
 ## 大二學生
 
 
-```R
+```
 sample <- observing %>% filter(grade == 2)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -153,7 +153,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ## 大三學生
 
 
-```R
+```
 sample <- observing %>% filter(grade == 3)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -170,7 +170,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ## 大四學生
 
 
-```R
+```
 sample <- observing %>% filter(grade == 4)
 sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)- p/2) %>% 
     ggplot(aes(x = "", y = p, fill = factor(dress20up, levels = c(T, F)))) +
@@ -187,14 +187,14 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 ## 按年級比較
 
 
-```R
-options(repr.plot.width=8, repr.plot.height=8)
+```
+options(repr.plot.width=16, repr.plot.height=8)
 observing %>% group_by(grade) %>% summarise(dress20up = sum(dress20up) ,total = n()) %>% mutate(p = dress20up / total) %>%
     ggplot(aes(x = grade, y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
                    y= p ), stat= "identity", position = position_dodge(1), size = 6) +
-    labs(x = "Grade", y = "Rate of Spend more than 20min/day at dressing up", title = "The spend at dressing up") +
-    theme(plot.title = element_text(size = 24),
+    labs(x = "Grade", y = "Rate of Spend more than 20min/day at dressing up", title = " Bar Chart of Proportion of Students Spending More than 20 min Dressing Up per Day for Different Genders") +
+    theme(plot.title = element_text(size = 22),
           axis.title = element_text(size = 18))
 ```
 
@@ -214,14 +214,27 @@ observing %>% group_by(grade) %>% summarise(dress20up = sum(dress20up) ,total = 
 ## 按學院比較
 
 
-```R
-options(repr.plot.width=8, repr.plot.height=8)
-observing %>% group_by(school) %>% summarise(dress20up = sum(dress20up) ,total = n()) %>% mutate(p = dress20up / total) %>%
-    ggplot(aes(x = factor(school), y = p)) + geom_col(fill = "#FF935C") +
+```
+options(repr.plot.width=16, repr.plot.height=8)
+
+ob2 <- observing
+ob2$school[ob2$school == 1] = "文學院"
+ob2$school[ob2$school == 2] = "理學院"
+ob2$school[ob2$school == 3] = "社科院"
+ob2$school[ob2$school == 4] = "醫學院"
+ob2$school[ob2$school == 5] = "工學院"
+ob2$school[ob2$school == 6] = "生農學院"
+ob2$school[ob2$school == 7] = "管理學院"
+ob2$school[ob2$school == 8] = "公衛學院"
+ob2$school[ob2$school == 9] = "電資學院"
+ob2$school[ob2$school == 10] = "法律學院"
+ob2$school[ob2$school == 11] = "生科院"
+ob2 %>% group_by(school) %>% summarise(dress20up = sum(dress20up) ,total = n()) %>% mutate(p = dress20up / total) %>%
+    ggplot(aes(x = (school), y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
                    y= p ), stat= "identity", position = position_dodge(1), size = 6) +
-    labs(x = "school", y = "Rate of Spend more than 20min/day at dressing up", title = "The spend at dressing up") +
-    theme(plot.title = element_text(size = 24),
+    labs(x = "school", y = "Proportion", title = " Bar Chart of Proportion of Students Spending More than 20 min Dressing Up per Day for Different Colleges") +
+    theme(plot.title = element_text(size = 22),
           axis.title = element_text(size = 18))
 ```
 
@@ -241,7 +254,7 @@ observing %>% group_by(school) %>% summarise(dress20up = sum(dress20up) ,total =
 # 非管院學生花費超過20分/日在著裝 之信賴區間
 
 
-```R
+```
 sample <- observing %>% filter(school != 7)
 ptable <- sample %>% summarise(n = n(), p = n()/ nrow(sample))
 ```
@@ -249,7 +262,7 @@ ptable <- sample %>% summarise(n = n(), p = n()/ nrow(sample))
 #### 檢查 $np$  和 $n(1-p)$ 大於 5
 
 
-```R
+```
 phat <- as.numeric(ptable[2, "p"])
 paste("np =", phat * nrow(sample))
 paste("n(1-p) =", (1-phat) * nrow(sample))
@@ -264,7 +277,7 @@ paste("n(1-p) =", (1-phat) * nrow(sample))
 
 
 
-```R
+```
 alpha <- 0.05
 UCL <- phat + qnorm(alpha/2, lower.tail = F) * sqrt(phat * (1-phat)/nrow(sample))
 LCL <- phat - qnorm(alpha/2, lower.tail = F) * sqrt(phat * (1-phat)/nrow(sample))
@@ -282,7 +295,7 @@ $H_0 : p \geqslant 0.2\\H_1 : p < 0.2$
 #### p-value are
 
 
-```R
+```
 p0 <- 0.2
 z <- (phat - p0)/sqrt(p0*(1-p0)/nrow(sample))
 pnorm(z, lower.tail = T)
@@ -295,7 +308,7 @@ pnorm(z, lower.tail = T)
 # 管院學生花費超過20分/日在著裝 之信賴區間
 
 
-```R
+```
 sample <- observing %>% filter(school == 7)
 ptable <- sample %>% summarise(n = n(), p = n()/ nrow(sample))
 ```
@@ -303,7 +316,7 @@ ptable <- sample %>% summarise(n = n(), p = n()/ nrow(sample))
 #### Check if $np$ and $n(1-p)$ larger than 5
 
 
-```R
+```
 phat <- as.numeric(ptable[2, "p"])
 paste("np =", phat * nrow(sample))
 paste("n(1-p) =", (1-phat) * nrow(sample))
@@ -320,7 +333,7 @@ paste("n(1-p) =", (1-phat) * nrow(sample))
 #### 計算在95%信心水準下的的信賴區間
 
 
-```R
+```
 alpha <- 0.05
 UCL <- phat + qnorm(alpha/2, lower.tail = F) * sqrt(phat * (1-phat)/nrow(sample))
 LCL <- phat - qnorm(alpha/2, lower.tail = F) * sqrt(phat * (1-phat)/nrow(sample))
@@ -338,7 +351,7 @@ $H_0 : p \leqslant 0.2\\H_1 : p > 0.2$
 #### p-value are
 
 
-```R
+```
 p0 <- 0.2
 z <- (phat - p0)/sqrt(p0*(1-p0)/nrow(sample))
 pnorm(z, lower.tail = F)

@@ -186,7 +186,7 @@ sample %>% summarise(n = n(), p = n()/ nrow(sample)) %>% mutate(pos = cumsum(p)-
 
 
 ```R
-options(repr.plot.width=8, repr.plot.height=8)
+options(repr.plot.width=16, repr.plot.height=8)
 observing %>% group_by(grade) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) %>% mutate(p = Eng4up / total) %>%
     ggplot(aes(x = grade, y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
@@ -212,8 +212,20 @@ observing %>% group_by(grade) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) %
 
 
 ```R
-options(repr.plot.width=8, repr.plot.height=8)
-observing %>% group_by(school) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) %>% mutate(p = Eng4up / total) %>%
+options(repr.plot.width=16, repr.plot.height=8)
+ob2 <- observing
+ob2$school[ob2$school == 1] = "文學院"
+ob2$school[ob2$school == 2] = "理學院"
+ob2$school[ob2$school == 3] = "社科院"
+ob2$school[ob2$school == 4] = "醫學院"
+ob2$school[ob2$school == 5] = "工學院"
+ob2$school[ob2$school == 6] = "生農學院"
+ob2$school[ob2$school == 7] = "管理學院"
+ob2$school[ob2$school == 8] = "公衛學院"
+ob2$school[ob2$school == 9] = "電資學院"
+ob2$school[ob2$school == 10] = "法律學院"
+ob2$school[ob2$school == 11] = "生科院"
+ob2 %>% group_by(school) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) %>% mutate(p = Eng4up / total) %>%
     ggplot(aes(x = factor(school), y = p)) + geom_col(fill = "#FF935C") +
     geom_text(aes( label = scales::percent(p),
                    y= p ), stat= "identity", position = position_dodge(1), size = 6) +
@@ -226,7 +238,7 @@ observing %>% group_by(school) %>% summarise(Eng4up = sum(Eng4up) ,total = n()) 
 ![png](output_23_0.png)
 
 
-# 非管院學生英文程度大於或等於4 之信賴區間
+# 非管院學生英文程度大於或等於C1 之信賴區間
 
 
 ```R
@@ -280,7 +292,7 @@ pnorm(z, lower.tail = T)
 0.399684321031827
 
 
-# 管院學生英文程度大於或等於4 之信賴區間
+# 管院學生英文程度大於或等於C1 之信賴區間
 
 
 ```R
